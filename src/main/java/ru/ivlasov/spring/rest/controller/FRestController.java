@@ -33,4 +33,10 @@ public class FRestController {
         return e;
     }
 
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee emp) {
+        employeeService.saveEmployee(emp);
+        return emp;
+    }
+
 }
