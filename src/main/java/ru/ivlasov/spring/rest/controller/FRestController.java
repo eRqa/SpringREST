@@ -39,4 +39,20 @@ public class FRestController {
         return emp;
     }
 
+    @PutMapping("/employees")
+    public Employee updateEmployee(@RequestBody Employee e) {
+        employeeService.saveEmployee(e);
+        return e;
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public String deleteEmployee(@PathVariable int id) {
+        Employee emp = employeeService.findEmployeeById(id);
+        if (emp == null) {
+            throw new NoSuchEmployeeException("There is no employee with id = " + id);
+        }
+        employeeService.deleteEmployee(id);
+        return "Employee with id = " + id + " was deleted";
+    }
+
 }
